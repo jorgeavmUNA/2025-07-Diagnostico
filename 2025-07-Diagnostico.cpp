@@ -6,11 +6,14 @@
 #include <windows.h> // Para SetConsoleOutputCP
 using namespace std;
 int integerArray[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+int numberOfElements =10;
 
 void selectMenuOption(int selection);
 void playRockPaperScissors();
 void findGreaterThanAdjacent();
 
+//CHECK: checkGameWinner is an optional name
+//CHECK:  a better name for the params is player1Choice and player2Choice
 
 string determineRockPaperScissorsWinner(string player1, string player2)
 {
@@ -45,7 +48,9 @@ string determineRockPaperScissorsWinner(string player1, string player2)
   return "Los datos ingresados no corresponden.";
 }
 
-string getElementsGreaterThanAdjacent(int numberOfElements)
+
+//CECK: Asumimos que tenemos el arreglo y su tamaño declarado
+string getElementsGreaterThanAdjacent()
 {
   if (numberOfElements < 3)
   {
@@ -53,11 +58,14 @@ string getElementsGreaterThanAdjacent(int numberOfElements)
   }
 
   string result = "";
+  int elementsToEvaluate =numberOfElements-1;
 
-  for (int i = 1; i < numberOfElements - 1; i++)
+  for (int i = 1; i < elementsToEvaluate - 1; i++)
   {
-    if ((integerArray[i] > integerArray[i - 1]) && (integerArray[i] > integerArray[i + 1]))
-    {
+    bool isGreaterThanPrevious=(integerArray[i] > integerArray[i - 1]);
+    bool isGreaterThanNext=(integerArray[i] > integerArray[i + 1]);
+    if (isGreaterThanPrevious && isGreaterThanNext)
+    { 
       result += to_string(integerArray[i]) + ", ";
     }
   }
