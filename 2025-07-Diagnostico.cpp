@@ -7,12 +7,12 @@
 using namespace std;
 int integerArray[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-void menuSelection(int selection);
-void menuOption1();
-void menuOption2();
+void selectMenuOption(int selection);
+void playdetermineRockPaperScissorsWinner();
+void findGreaterThanAdjacent();
 
 
-string rockPaperScissors(string player1, string player2)
+string determineRockPaperScissorsWinner(string player1, string player2)
 {
   if (player1 == "tijeras" && player2 == "papel")
   {
@@ -38,19 +38,22 @@ string rockPaperScissors(string player1, string player2)
   {
     return "El jugador 1 gana";
   }
-
-  return "Empate";
+  if (player1 == player2)
+  {
+      return "Empate";
+  }
+  return "Los datos ingresados no corresponden.";
 }
-string greaterThanAdjacent(int numberOfElements)
+string getElementsGreaterThanAdjacent(int numberOfElements)
 {
     if (numberOfElements < 3)
     {
         return "";
     }
-    numberOfElements--;
+
     string result = "";
 
-    for (int i = 1; i < numberOfElements;i++)
+    for (int i = 1; i < numberOfElements - 1;i++)
     {
         if ((integerArray[i] > integerArray[i - 1]) && (integerArray[i] > integerArray[i + 1]))
         {
@@ -75,27 +78,27 @@ int main()
     cin >> menuOption;
     if (menuOption > 0 && menuOption < 3) 
     {
-        menuSelection(menuOption);
+        selectMenuOption(menuOption);
     }
   }
   return 0;
 }
 
-void menuSelection(int selection)
+void selectMenuOption(int selection)
 {
     if (selection == 1)
     {
-        menuOption1();
+        playdetermineRockPaperScissorsWinner();
         return;
     }
     if (selection == 2)
     {
-        menuOption2();
+        findGreaterThanAdjacent();
         return;
     }
 }
 
-void menuOption1()
+void playdetermineRockPaperScissorsWinner()
 {
     string player1Hand, player2Hand;
     player1Hand = player2Hand = "nothing yet";
@@ -105,11 +108,11 @@ void menuOption1()
     cin >> player1Hand;
     cout << endl << "Escriba la mano del jugador 2: ";
     cin >> player2Hand;
-    cout << rockPaperScissors(player1Hand, player2Hand);
+    cout << determineRockPaperScissorsWinner(player1Hand, player2Hand);
     cout << endl;
     system("pause");
 }
-void menuOption2()
+void findGreaterThanAdjacent()
 {
     int quantity = 0;
     string greaterElements = "";
@@ -126,7 +129,7 @@ void menuOption2()
         cout << "Digite un valor entero para la posicion " << i << ": ";
         cin >> integerArray[i];
     }
-    greaterElements = greaterThanAdjacent(quantity);
+    greaterElements = getElementsGreaterThanAdjacent(quantity);
     cout << greaterElements << endl;
     system("pause");
 }
